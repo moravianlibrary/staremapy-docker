@@ -6,6 +6,9 @@ RUN apt-get update && \
     apt-get install -y git python cron && \
     rm -rf /var/lib/apt/lists/*
 
+COPY apache.conf /etc/apache2/sites-available/000-default.conf
+RUN  ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/cgi.load
+
 COPY scripts /scripts
 RUN chmod u+x /scripts/generovat.sh
 RUN chmod u+x /scripts/init.sh
